@@ -36,3 +36,21 @@ plt.show()
 # Histogram for mean rating
 sns.histplot(summary["mean rating"], bins=60)
 plt.show()
+
+# Make a jointplot of no. of reviews vs mean rating
+sns.jointplot(x=mean_rating, y=total_reviews)
+plt.xlabel("mean rating")
+plt.ylabel("no. of reviews")
+plt.show()
+
+# CREATE SIMPLE RECOMMENDER SYSTEM ------------------------------------------------
+df.head()
+
+# Let's create a pivot table where we have the ratings as the values
+# And the columns and rows can be the titles and the user_id
+moviemat = df.pivot_table(index='user_id', columns='title', values='rating')
+moviemat.head()
+
+# Let's look at the 10 most rated movies and their associated mean ratings
+summary.sort_values("no. of reviews", ascending=False).head(10)
+
